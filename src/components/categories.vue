@@ -114,6 +114,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/common.scss";
+
 ol {
   list-style-type: none;
   display: flex;
@@ -139,6 +141,7 @@ ol > li {
   a {
     display: block;
     width: 100%;
+    height: 100%;
   }
 }
 
@@ -179,5 +182,11 @@ ol > li {
 
 .category-item:hover {
   cursor: pointer;
+}
+
+#salesCategory {
+  text-transform: uppercase;
+  color: $font-red;
+  font-size: 1.1rem;
 }
 </style>
