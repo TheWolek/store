@@ -130,7 +130,7 @@ ul {
 }
 
 ol > li {
-  width: 4vw;
+  // width: 4vw;
   border-top-left-radius: 4%;
   border-top-right-radius: 4%;
 
@@ -153,14 +153,14 @@ ol > li {
 
 .dropdown-menu {
   width: 20em;
-  left: -5em !important;
+  left: -3em !important;
   gap: 1.7em;
   text-transform: uppercase;
   padding-left: 0.7em;
 }
 
 #manCategoryList {
-  left: -10.8em !important;
+  left: -5em !important;
 }
 
 .dropdown-menu.show {

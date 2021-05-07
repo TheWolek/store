@@ -1,5 +1,5 @@
 <template>
-  <div class="navi col-12">
+  <div class="navi">
     <div class="menu">
       <router-link to="/">
         <img alt="Vue logo" src="../assets/logo.png" />
@@ -50,7 +50,7 @@ export default {
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    padding: 1em;
+    padding: 1em 0;
 
     img {
       height: 70px;
@@ -61,11 +61,12 @@ export default {
     }
 
     .links {
-      width: 10vw;
+      // width: 10vw;
       height: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 0.95rem;
 
       a {
         color: $font-dark;
