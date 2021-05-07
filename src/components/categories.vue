@@ -15,8 +15,17 @@
         Ona
       </a>
       <ul id="womanCategoryList" class="dropdown-menu">
-        <li v-for="cat in womanCategories" :key="cat" class="dropdown-item">
-          {{ cat }}
+        <li
+          v-for="(cat, name) in womanCategories"
+          :key="name"
+          class="dropdown-menu-item"
+        >
+          {{ name }}
+          <ul>
+            <li v-for="item in cat" :key="item" class="category-item">
+              {{ item }}
+            </li>
+          </ul>
         </li>
       </ul>
     </li>
@@ -32,8 +41,17 @@
         On
       </a>
       <ul id="manCategoryList" class="dropdown-menu">
-        <li v-for="cat in manCategories" :key="cat" class="dropdown-item">
-          {{ cat }}
+        <li
+          v-for="(cat, name) in manCategories"
+          :key="name"
+          class="dropdown-menu-item"
+        >
+          {{ name }}
+          <ul>
+            <li v-for="item in cat" :key="item" class="category-item">
+              {{ item }}
+            </li>
+          </ul>
         </li>
       </ul>
     </li>
@@ -48,8 +66,48 @@ export default {
   name: "categories",
   data: function() {
     return {
-      womanCategories: ["sukienki", "koszule", "T-shirty"],
-      manCategories: ["T-shirty", "szorty", "bluzy"],
+      //in future this will be fetched from API...
+      womanCategories: {
+        kolekcja: [
+          "Sukienki",
+          "Koszule",
+          "T-shirty",
+          "Bluzy",
+          "Swetry",
+          "Spodnie",
+          "Spódnice",
+          "Szorty",
+        ],
+        dodatki: [
+          "Buty",
+          "Torby, plecaki",
+          "Skarpetki, bielizna",
+          "Czapki",
+          "Portfele",
+          "Biżuteria",
+          "Okulary",
+          "Stroje kąpielowe",
+        ],
+      },
+      manCategories: {
+        kolekcja: [
+          "T-shirty",
+          "Szorty",
+          "Koszule",
+          "Bluzy",
+          "Spodnie",
+          "Kurtki, płaszcze",
+        ],
+        dodatki: [
+          "Buty",
+          "Okulary",
+          "Czapki",
+          "Skarpetki",
+          "Torby, plecaki",
+          "Paski",
+          "Portfele",
+        ],
+      },
     };
   },
 };
@@ -71,12 +129,10 @@ ul {
 
 ol > li {
   width: 4vw;
-  // border: 1px solid #000;
   border-top-left-radius: 4%;
   border-top-right-radius: 4%;
 
   &:hover {
-    // box-shadow: rgba(0, 0, 0, 8%) 0px 0px 2px 1px;
     cursor: pointer;
   }
 
@@ -86,8 +142,42 @@ ol > li {
   }
 }
 
+.dropdown {
+  ul {
+    cursor: default;
+  }
+}
+
 .dropdown-menu {
   width: 20em;
-  margin-left: -95px;
+  left: -5em !important;
+  gap: 1.7em;
+  text-transform: uppercase;
+  padding-left: 0.7em;
+}
+
+#manCategoryList {
+  left: -10.8em !important;
+}
+
+.dropdown-menu.show {
+  display: flex;
+}
+
+.dropdown-menu-item {
+  ul {
+    font-weight: normal;
+    text-transform: capitalize;
+    padding-left: 1em;
+    padding-top: 0.5em;
+
+    li + li {
+      padding-top: 0.6em;
+    }
+  }
+}
+
+.category-item:hover {
+  cursor: pointer;
 }
 </style>
