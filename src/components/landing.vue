@@ -59,16 +59,16 @@ export default {
       this.activeSlide = slideId;
     },
   },
-  // mounted: function() {
-  //   window.setInterval(() => {
-  //     if (this.activeSlide == 2) {
-  //       this.changeSlide(0);
-  //       return;
-  //     }
+  mounted: function() {
+    window.setInterval(() => {
+      if (this.activeSlide == 2) {
+        this.changeSlide(0);
+        return;
+      }
 
-  //     this.changeSlide(this.activeSlide + 1);
-  //   }, 3000);
-  // },
+      this.changeSlide(this.activeSlide + 1);
+    }, 3000);
+  },
 };
 </script>
 
