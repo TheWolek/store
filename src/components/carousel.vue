@@ -3,8 +3,8 @@
     <div id="imgHolder">
       <div id="imgFrame">
         <div id="prevImg" />
-        <div src="https://via.placeholder.com/1600x400" id="activeImg" />
-        <div src="https://via.placeholder.com/1600420" id="nextImg" />
+        <div id="activeImg" />
+        <div id="nextImg" />
       </div>
     </div>
     <div id="dots">
