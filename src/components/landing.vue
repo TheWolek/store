@@ -1,11 +1,17 @@
 <template>
   <div class="landing">
     <div id="carousel">
-      <div id="imgHolder"></div>
+      <div id="imgHolder">
+        <div id="imgFrame">
+          <div id="prevImg" />
+          <div src="https://via.placeholder.com/1600x400" id="activeImg" />
+          <div src="https://via.placeholder.com/1600420" id="nextImg" />
+        </div>
+      </div>
       <div id="dots">
-        <div id="pic1" class="active"></div>
-        <div id="pic2"></div>
-        <div id="pic3"></div>
+        <div id="0" v-on:click="SelectSlide" class="active"></div>
+        <div id="1" v-on:click="SelectSlide"></div>
+        <div id="2" v-on:click="SelectSlide"></div>
       </div>
     </div>
   </div>
@@ -14,6 +20,55 @@
 <script>
 export default {
   name: "landing",
+  data: function() {
+    return {
+      activeSlide: 0,
+    };
+  },
+  methods: {
+    selectDot: function(dotId) {
+      document.querySelectorAll("#dots div").forEach((item) => {
+        item.classList.remove("active");
+      });
+
+      $("#" + dotId).addClass("active");
+    },
+
+    SelectSlide: function(event) {
+      let selectedSlide = event.target.id;
+      this.changeSlide(parseInt(selectedSlide));
+    },
+
+    changeSlide: function(slideId) {
+      console.log("change slide to: ", slideId);
+      this.selectDot(slideId);
+      switch (slideId) {
+        case 0:
+          $("#imgFrame").css("transform", "translateX(1620px)");
+          break;
+
+        case 1:
+          $("#imgFrame").css("transform", "translateX(0)");
+          break;
+
+        case 2:
+          $("#imgFrame").css("transform", "translateX(-1620px)");
+          break;
+      }
+
+      this.activeSlide = slideId;
+    },
+  },
+  // mounted: function() {
+  //   window.setInterval(() => {
+  //     if (this.activeSlide == 2) {
+  //       this.changeSlide(0);
+  //       return;
+  //     }
+
+  //     this.changeSlide(this.activeSlide + 1);
+  //   }, 3000);
+  // },
 };
 </script>
 
@@ -31,8 +86,37 @@ export default {
     #imgHolder {
       width: 100%;
       height: 400px;
-      background-image: url("https://via.placeholder.com/330x400");
-      background-repeat: no-repeat;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+
+      #imgFrame {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        transition: all 1s ease-in-out;
+        transform: translateX(1620px);
+
+        div {
+          width: 1600px;
+          height: 400px;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        #prevImg {
+          background-image: url("https://via.placeholder.com/1600x410");
+        }
+
+        #activeImg {
+          background-image: url("https://via.placeholder.com/1600x400");
+        }
+
+        #nextImg {
+          background-image: url("https://via.placeholder.com/1600x420");
+        }
+      }
     }
 
     #dots {
@@ -52,6 +136,7 @@ export default {
         height: 20px;
         background: $bg-black-trans;
         border-radius: 50%;
+        transition: all 0.3s ease;
 
         &:hover {
           cursor: pointer;
@@ -71,8 +156,8 @@ export default {
       #imgHolder {
         width: 100%;
         height: 400px;
-        background-image: url("https://via.placeholder.com/738x400");
-        background-repeat: no-repeat;
+        // background-image: url("https://via.placeholder.com/738x400");
+        // background-repeat: no-repeat;
       }
     }
   }
@@ -84,8 +169,8 @@ export default {
       #imgHolder {
         width: 100%;
         height: 400px;
-        background-image: url("https://via.placeholder.com/1570x400");
-        background-repeat: no-repeat;
+        // background-image: url("https://via.placeholder.com/1570x400");
+        // background-repeat: no-repeat;
       }
 
       #dots {
