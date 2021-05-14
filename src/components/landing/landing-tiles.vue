@@ -26,7 +26,7 @@
           }
         "
       >
-        <img src="../assets/prev.png" />
+        <img src="../../assets/prev.png" />
       </div>
       <div id="tilesFrame">
         <div class="tile" v-for="tile in tiles" :key="tile.name">
@@ -43,7 +43,7 @@
           }
         "
       >
-        <img src="../assets/next.png" />
+        <img src="../../assets/next.png" />
       </div>
     </div>
   </div>
@@ -174,7 +174,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/common.scss";
+@import "../../styles/common.scss";
 
 .tiles-container {
   display: flex;

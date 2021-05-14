@@ -6,7 +6,7 @@
 
 <script>
 // @ is an alias to /src
-import landing from "@/components/landing.vue";
+import landing from "@/components/landing/landing.vue";
 
 export default {
   name: "Home",
