@@ -198,7 +198,7 @@ export default {
     .cover {
       width: 100%;
       height: 100%;
-      background: rgb(255, 232, 25);
+      background: $bg-yellow;
       position: absolute;
       top: 0;
       transform: translateY(100%);
