@@ -21,6 +21,7 @@ export default {
   data: function() {
     return {
       activeSlide: 0,
+      SliderTimer: 0,
     };
   },
   methods: {
@@ -38,8 +39,9 @@ export default {
     },
 
     changeSlide: function(slideId) {
-      console.log("change slide to: ", slideId);
       this.selectDot(slideId);
+      window.clearInterval(this.SliderTimer);
+      this.SliderTimer = window.setInterval(this.IntervalSlideChange, 5000);
       switch (slideId) {
         case 0:
           $("#imgFrame").css("transform", "translateX(1620px)");
@@ -56,17 +58,21 @@ export default {
 
       this.activeSlide = slideId;
     },
-  },
-  //   mounted: function() {
-  //     window.setInterval(() => {
-  //       if (this.activeSlide == 2) {
-  //         this.changeSlide(0);
-  //         return;
-  //       }
+    IntervalSlideChange: function() {
+      if (this.activeSlide == 2) {
+        this.changeSlide(0);
+        return;
+      }
 
-  //       this.changeSlide(this.activeSlide + 1);
-  //     }, 5000);
-  //   },
+      this.changeSlide(this.activeSlide + 1);
+    },
+    startSlider: function() {
+      this.SliderTimer = window.setInterval(this.IntervalSlideChange, 5000);
+    },
+  },
+  mounted: function() {
+    this.startSlider();
+  },
 };
 </script>
 
@@ -91,7 +97,7 @@ export default {
       display: flex;
       justify-content: center;
       gap: 20px;
-      transition: all 1s ease-in-out;
+      transition: all 1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
       transform: translateX(1620px);
 
       div {

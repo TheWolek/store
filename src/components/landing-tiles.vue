@@ -2,14 +2,17 @@
   <div class="tiles">
     <div class="tiles-container">
       <div class="tile" id="sales">
+        <div class="cover"></div>
         <h2>sales</h2>
         <h3>do - 50%</h3>
       </div>
       <div class="tile" id="newForHer">
+        <div class="cover"></div>
         <h2>nowości</h2>
         <h3>dla niej</h3>
       </div>
       <div class="tile" id="newForHim">
+        <div class="cover"></div>
         <h2>nowości</h2>
         <h3>dla niego</h3>
       </div>
@@ -189,11 +192,35 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     text-transform: uppercase;
+    transition: all 0.8s ease;
+    overflow: hidden;
+    position: relative;
+
+    .cover {
+      width: 100%;
+      height: 100%;
+      background: rgb(255, 232, 25);
+      position: absolute;
+      top: 0;
+      transform: translateY(100%);
+      transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+      z-index: 1;
+    }
+
+    h2,
+    h3 {
+      position: relative;
+      z-index: 2;
+    }
 
     h2 {
       font-weight: bold;
     }
   }
+}
+
+.tile:hover .cover {
+  transform: translateY(0);
 }
 
 .tiles-carousel {
@@ -202,6 +229,7 @@ export default {
   align-items: center;
   overflow-x: hidden;
   position: relative;
+  margin-top: 2em;
 
   #tilesFrame {
     display: flex;
