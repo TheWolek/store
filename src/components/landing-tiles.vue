@@ -192,7 +192,6 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     text-transform: uppercase;
-    transition: all 0.8s ease;
     overflow: hidden;
     position: relative;
 
@@ -207,20 +206,27 @@ export default {
       z-index: 1;
     }
 
+    &:hover .cover {
+      transform: translateY(0);
+    }
+
+    &:hover h2,
+    &:hover h3 {
+      transform: scale(1.15);
+    }
+
     h2,
     h3 {
       position: relative;
       z-index: 2;
+      will-change: scale;
+      transition: all 0.5s ease;
     }
 
     h2 {
       font-weight: bold;
     }
   }
-}
-
-.tile:hover .cover {
-  transform: translateY(0);
 }
 
 .tiles-carousel {
