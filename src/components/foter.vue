@@ -53,7 +53,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   border-top: 3px solid #000;
-  padding: 1em 0;
+  padding: 1.5em 0 0 1em;
   gap: 2em;
   margin-top: 4em;
 
