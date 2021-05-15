@@ -5,7 +5,7 @@
         <img alt="Vue logo" src="../assets/logo.png" />
       </router-link>
       <div class="links">
-        <router-link to="/account">
+        <router-link to="/login">
           <img src="../assets/account.png" alt="account" />
           <div>Twoje konto</div>
         </router-link>

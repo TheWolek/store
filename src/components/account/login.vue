@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="login-box">
+    <div class="box">
       <form>
         <h3>Zaloguj się</h3>
         <div class="form-group">
@@ -15,43 +15,10 @@
       </form>
     </div>
     <div class="register-box">
-      <form>
-        <h3>Nie masz konta? Zarejestruj się</h3>
-        <div class="from-group">
-          <label for="R-name">Imię:</label>
-          <input type="text" id="R-name" name="name" class="form-control" />
-        </div>
-        <div class="from-group">
-          <label for="R-surname">Nazwisko:</label>
-          <input
-            type="text"
-            id="R-surname"
-            name="surname"
-            class="form-control"
-          />
-        </div>
-        <div class="from-group">
-          <label for="R-mail">E-mail:</label>
-          <input type="email" id="R-mail" name="mail" class="form-control" />
-        </div>
-        <div class="from-group">
-          <label for="R-pass">Hasło:</label>
-          <input type="password" id="R-pass" name="pass" class="form-control" />
-        </div>
-        <div class="form-check">
-          <input
-            type="checkbox"
-            id="R-reg"
-            name="R-reg"
-            value=""
-            class="form-check-input"
-          />
-          <label for="R-reg" class="form-check-label"
-            >Akceptuje Regulamin</label
-          >
-        </div>
-        <input type="submit" value="Załóż konto" class="btn-primary" />
-      </form>
+      <h3>Nie masz konta?</h3>
+      <router-link to="/register" class="btn-secondary">
+        Załóż konto
+      </router-link>
     </div>
   </div>
 </template>
@@ -70,25 +37,92 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  gap: 2em;
+  flex-direction: column;
+  gap: 3em;
   padding: 2em 0;
 
-  input[type="submit"] {
+  h3 {
+    margin-bottom: 1em;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  input[type="submit"],
+  a {
     padding: 0.5em 1.2em;
     border: none;
     outline: none;
-    border-radius: 4%;
+    border-radius: 7px;
+    margin-top: 1em;
+    font-size: 14px;
+    width: 80%;
   }
 
-  .login-box,
-  .register-box {
-    padding: 3em 6em;
-  }
+  // a {
+  //   display: block;
+  //   width: 100%;
+  //   margin-top: 0;
+  // }
 
-  .login-box {
-    // box-shadow: 1px 5px 15px 3px rgba(0, 0, 0, 0.29);
-    // padding: 3em 6em;
+  .box {
+    box-shadow: 0px 5px 15px -4px rgba(0, 0, 0, 0.4);
     border-radius: 3%;
+    // padding: 3em 6em;
+    padding: 1em;
+    width: 100%;
+  }
+
+  .register-box {
+    width: 100%;
+    padding: 1em;
+
+    a {
+      display: block;
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .wrap {
+    align-items: center;
+    .box,
+    .register-box {
+      width: 80%;
+    }
+
+    .register-box {
+      a {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .wrap {
+    flex-direction: row;
+    align-items: flex-start;
+
+    .box,
+    .register-box {
+      width: 30%;
+      padding: 2em;
+    }
+
+    .box {
+      input[type="text"],
+      input[type="password"] {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      input[type="submit"] {
+        width: 70%;
+      }
+    }
   }
 }
 </style>
