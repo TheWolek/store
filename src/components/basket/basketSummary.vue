@@ -13,6 +13,7 @@
           <span></span>
         </div>
         <form id="promoCodeForm" v-on:submit="this.checkCode">
+          <p id="errMsg"></p>
           <input
             type="text"
             id="promoCode"
@@ -38,7 +39,11 @@ export default {
   data: function () {
     return {
       discoundFormActive: false,
-      discountCodes: ["10"],
+      discountCodes: [
+        { code: "10", amount: 10 },
+        { code: "MISIA", amount: 50 },
+      ],
+      usedDiscounts: [],
       promoCode: null,
     };
   },
@@ -46,26 +51,51 @@ export default {
     changeDiscoundForm: function () {
       if (!this.discoundFormActive) {
         $("#discountBtnIcon").addClass("discountFormActive");
-        $("#discountBtn").css("paddingBottom", "5em");
+        $("#discountBtn").css("paddingBottom", "6.5em");
+        $("#errMsg").html("");
         this.discoundFormActive = true;
         return;
       }
 
       $("#discountBtnIcon").removeClass("discountFormActive");
       $("#discountBtn").css("padding", "0.2em");
+      $("#errMsg").html("");
       this.discoundFormActive = false;
       return;
     },
 
     checkCode: function (e) {
-      if (this.promoCode === "10") {
-        $("#promoCode").val("");
-        this.changeDiscoundForm();
-        this.$emit("activeCode", 10);
+      e.preventDefault();
+      if (this.usedDiscounts.includes(this.promoCode)) {
+        $("#errMsg").html("Kod został już użyty");
+        this.promoCode = null;
+        return false;
       }
 
-      $("#promoCode").val("");
-      e.preventDefault();
+      if (!this.findCode()) {
+        this.promoCode = null;
+        $("#errMsg").html("Błędny kod");
+      }
+    },
+
+    findCode: function () {
+      const list = this.discountCodes;
+      let found = false;
+
+      list.forEach((el) => {
+        if (el.code === this.promoCode) {
+          console.log(el.code, el.amount);
+          this.changeDiscoundForm();
+          this.usedDiscounts.push(this.promoCode);
+          this.promoCode = null;
+          this.$emit("activeCode", el.amount);
+          $("#errMsg").html("");
+          found = true;
+          return found;
+        }
+      });
+
+      return found;
     },
   },
 };
@@ -133,8 +163,16 @@ form {
       margin-top: 0.5em;
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       gap: 0;
       justify-content: center;
+
+      #errMsg {
+        width: 100%;
+        margin: 0;
+        color: $font-red;
+        font-weight: bold;
+      }
 
       input[type="text"] {
         width: 60%;

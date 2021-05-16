@@ -41,7 +41,7 @@ export default {
     },
 
     updateBasket: function (e) {
-      let newSum = this.BasketSum - e;
+      let newSum = this.BasketSum - this.BasketSum * (e / 100);
       newSum = Math.round(newSum * 100) / 100;
       console.log(newSum);
       this.BasketSum = newSum;
