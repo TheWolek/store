@@ -2,7 +2,7 @@
   <div class="summary">
     <div class="price">
       <p>Łączna kwota</p>
-      <p>{{ sum }} zł</p>
+      <p>{{ sum }}zł</p>
     </div>
     <hr />
     <form>
@@ -12,8 +12,13 @@
           <span></span>
           <span></span>
         </div>
-        <form>
-          <input type="text" id="promoCode" name="promoCode" />
+        <form id="promoCodeForm" v-on:submit="this.checkCode">
+          <input
+            type="text"
+            id="promoCode"
+            name="promoCode"
+            v-model="promoCode"
+          />
           <input type="submit" value="Aktywuj" />
         </form>
       </button>
@@ -33,6 +38,8 @@ export default {
   data: function () {
     return {
       discoundFormActive: false,
+      discountCodes: ["10"],
+      promoCode: null,
     };
   },
   methods: {
@@ -48,6 +55,17 @@ export default {
       $("#discountBtn").css("padding", "0.2em");
       this.discoundFormActive = false;
       return;
+    },
+
+    checkCode: function (e) {
+      if (this.promoCode === "10") {
+        $("#promoCode").val("");
+        this.changeDiscoundForm();
+        this.$emit("activeCode", 10);
+      }
+
+      $("#promoCode").val("");
+      e.preventDefault();
     },
   },
 };

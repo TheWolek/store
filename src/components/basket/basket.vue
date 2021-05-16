@@ -16,7 +16,7 @@
           </div>
         </li>
       </ul>
-      <basketSummary v-bind:sum="this.basketSum" />
+      <basketSummary v-bind:sum="BasketSum" @activeCode="updateBasket" />
     </div>
   </div>
 </template>
@@ -36,8 +36,15 @@ export default {
         total += item.price;
       });
 
-      this.basketSum = total;
+      this.BasketSum = total;
       return;
+    },
+
+    updateBasket: function (e) {
+      let newSum = this.BasketSum - e;
+      newSum = Math.round(newSum * 100) / 100;
+      console.log(newSum);
+      this.BasketSum = newSum;
     },
   },
   data: function () {
@@ -46,7 +53,7 @@ export default {
         { id: 20, name: "buty", price: 49.99 },
         { id: 10, name: "T-shirt", price: 29.99 },
       ],
-      basketSum: 0,
+      BasketSum: 0,
     };
   },
   mounted: function () {
