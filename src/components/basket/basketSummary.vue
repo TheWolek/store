@@ -6,9 +6,9 @@
     </div>
     <hr />
     <form>
-      <button id="discountBtn" v-on:click="changeDiscoundForm">
-        Mam kod rabatowy
-        <div id="discountBtnIcon">
+      <button id="discountBtn">
+        <span v-on:click="changeDiscoundForm">Mam kod rabatowy</span>
+        <div id="discountBtnIcon" v-on:click="changeDiscoundForm">
           <span></span>
           <span></span>
         </div>
@@ -17,7 +17,11 @@
           <input type="submit" value="Aktywuj" />
         </form>
       </button>
-      <input type="submit" value="Przejdź do dostawy" class="btn-primary" />
+      <input
+        type="submit"
+        value="Przejdź do dostawy"
+        class="btn-primary NextBtn"
+      />
     </form>
   </div>
 </template>
@@ -50,6 +54,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../../styles/common.scss";
+
+hr {
+  background: $font-dark;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -58,7 +68,7 @@ form {
   gap: 1.5em;
 
   #discountBtn {
-    border: 1px solid #000;
+    border: 1px solid $font-dark;
     border-radius: 10px;
     width: 70%;
     height: 32px;
@@ -66,6 +76,12 @@ form {
     padding: 0.2em;
     overflow: hidden;
     transition: all 0.5s ease;
+
+    span {
+      display: block;
+      width: 100%;
+      height: 30px;
+    }
 
     #discountBtnIcon {
       position: absolute;
@@ -79,7 +95,7 @@ form {
       span {
         width: 15px;
         height: 3px;
-        background: #000;
+        background: $font-dark;
         position: absolute;
         top: 0;
         right: 0;
@@ -104,19 +120,19 @@ form {
 
       input[type="text"] {
         width: 60%;
-        border: 1px solid #000;
+        border: 1px solid $font-dark;
         border-right: none;
         padding: 0.2em;
       }
 
       input[type="submit"] {
         width: 30%;
-        border: 1px solid #000;
+        border: 1px solid $font-dark;
         border-radius: 0;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
         padding: 0.2em 0.5em;
-        background: rgb(56, 233, 56);
+        background: $bg-green;
         font-weight: bold;
       }
     }
@@ -126,10 +142,44 @@ form {
     }
   }
 
-  input[type="submit"] {
+  .NextBtn {
     border-radius: 10px;
     width: 75%;
     padding: 0.2em;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  form {
+    #discountBtn {
+      width: 50%;
+    }
+
+    .NextBtn {
+      width: 55%;
+      padding: 0.35em;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .summary {
+    width: 30%;
+    height: 250px;
+    box-shadow: 0px 5px 15px -4px rgba(0, 0, 0, 0.4),
+      0px 0px 20px -4px rgba(0, 0, 0, 0.4);
+    padding: 1em;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+
+    form {
+      #discountBtn {
+        width: 70%;
+      }
+
+      .NextBtn {
+        width: 75%;
+      }
+    }
   }
 }
 </style>

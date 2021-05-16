@@ -136,18 +136,20 @@ export default {
         display: flex;
         justify-content: space-around;
         font-weight: bold;
+
+        p {
+          margin: 0;
+        }
       }
     }
   }
-}
-
-@media screen and (min-width: 768px) {
 }
 
 @media screen and (min-width: 1024px) {
   .basket-wrap {
     .basket {
       flex-direction: row;
+      justify-content: space-around;
     }
   }
 }
