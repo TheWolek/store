@@ -16,30 +16,19 @@
           </div>
         </li>
       </ul>
-      <div class="summary">
-        <div class="price">
-          <p>Łączna kwota</p>
-          <p>{{ this.sumBasket() }}</p>
-        </div>
-        <hr />
-        <form>
-          <button class="discountBtn">
-            Mam kod rabatowy
-            <div class="discountBtnIcon">
-              <span></span>
-              <span></span>
-            </div>
-          </button>
-          <input type="submit" value="Przejdź do dostawy" class="btn-primary" />
-        </form>
-      </div>
+      <basketSummary v-bind:sum="this.basketSum" />
     </div>
   </div>
 </template>
 
 <script>
+import basketSummary from "./basketSummary";
+
 export default {
   name: "Basket",
+  components: {
+    basketSummary,
+  },
   methods: {
     sumBasket: function () {
       let total = 0;
@@ -47,7 +36,8 @@ export default {
         total += item.price;
       });
 
-      return total;
+      this.basketSum = total;
+      return;
     },
   },
   data: function () {
@@ -56,7 +46,11 @@ export default {
         { id: 20, name: "buty", price: 49.99 },
         { id: 10, name: "T-shirt", price: 29.99 },
       ],
+      basketSum: 0,
     };
+  },
+  mounted: function () {
+    this.sumBasket();
   },
 };
 </script>
