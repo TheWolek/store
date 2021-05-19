@@ -137,18 +137,6 @@ export default {
         }
       }
     }
-
-    .summary {
-      .price {
-        display: flex;
-        justify-content: space-around;
-        font-weight: bold;
-
-        p {
-          margin: 0;
-        }
-      }
-    }
   }
 }
 
