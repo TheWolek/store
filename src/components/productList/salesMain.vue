@@ -2,7 +2,12 @@
   <div>
     <div v-if="loading" id="loading">LOADING...</div>
     <div v-if="!loading" class="itemsWrap">
-      <div v-for="item in collection" :key="item.id" class="tile">
+      <router-link
+        v-for="item in collection"
+        :key="item.id"
+        v-bind:to="'./product/' + item.id"
+        class="tile"
+      >
         <div class="imgHolder">
           <img src="https://via.placeholder.com/370x500" />
         </div>
@@ -11,7 +16,7 @@
           <p class="newPrice">{{ item.newPrice }}zł</p>
           <p class="regularPrice">{{ item.regularPrice }}zł</p>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>

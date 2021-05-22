@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Basket from '../views/Basket.vue'
 import Sales from '../views/Sales.vue'
+import productPageView from '../views/productPage.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/sales',
     name: 'Sales',
     component: Sales
+  },
+  {
+    path: '/product/:id',
+    name: "product",
+    component: productPageView
   }
   // {
   //   path: '/about',
