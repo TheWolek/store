@@ -1,16 +1,31 @@
 <template>
   <div>
     <div class="salesSelect">
-      <button class="active" id="leftBtn">
+      <button
+        class="active"
+        id="leftBtn"
+        @click="
+          () => {
+            changeGender(0);
+          }
+        "
+      >
         <div class="btnBg left"></div>
         <span>dla niej</span>
       </button>
-      <button id="rightBtn">
+      <button
+        id="rightBtn"
+        @click="
+          () => {
+            changeGender(1);
+          }
+        "
+      >
         <div class="btnBg right"></div>
         <span>dla niego</span>
       </button>
     </div>
-    <Sales />
+    <Sales v-bind:gender="this.selectedGender" />
   </div>
 </template>
 
@@ -20,6 +35,25 @@ import Sales from "../components/productList/sales";
 export default {
   name: "sales",
   components: { Sales },
+  data: function () {
+    return {
+      selectedGender: 0,
+    };
+  },
+  methods: {
+    changeGender: function (selected) {
+      if (selected == 0) {
+        this.selectedGender = 0;
+        $("#leftBtn").addClass("active");
+        $("#rightBtn").removeClass("active");
+        return;
+      }
+
+      this.selectedGender = 1;
+      $("#leftBtn").removeClass("active");
+      $("#rightBtn").addClass("active");
+    },
+  },
 };
 </script>
 
@@ -58,11 +92,11 @@ export default {
     }
 
     .btnBg.left {
-      transform: translateX(-100%);
+      transform: translateX(-110%);
     }
 
     .btnBg.right {
-      transform: translateX(100%);
+      transform: translateX(110%);
     }
   }
 
@@ -74,7 +108,7 @@ export default {
     transform: translateX(0);
   }
 
-  button.active {
+  button.active span {
     font-weight: bold;
   }
 }
