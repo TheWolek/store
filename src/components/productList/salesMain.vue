@@ -9,7 +9,7 @@
         class="tile"
       >
         <div class="imgHolder">
-          <img src="https://via.placeholder.com/370x500" />
+          <img src="https://via.placeholder.com/350x500" />
         </div>
         <div class="itemDetails">
           <p class="name">{{ item.name }}</p>
@@ -65,9 +65,11 @@ export default {
 }
 
 .itemsWrap {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  // grid-template-columns: repeat(4, 1fr);
+  // grid-template-rows: auto;
   gap: 1.5em;
   opacity: 0;
   transition: all 1s ease;
