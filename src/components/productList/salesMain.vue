@@ -78,6 +78,7 @@ export default {
   .tile {
     &:hover {
       cursor: pointer;
+      text-decoration: none;
     }
 
     &:hover img {
@@ -92,6 +93,8 @@ export default {
       transition: all 0.3s ease-in-out;
     }
     .itemDetails {
+      color: $font-dark;
+      text-decoration: none;
       p {
         margin: 0;
       }
