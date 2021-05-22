@@ -1,5 +1,7 @@
 # store
 
+## visit https://optical-sight-314320.appspot.com/?#/
+
 ## Project setup
 ```
 npm install
