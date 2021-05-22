@@ -4,10 +4,11 @@
       <p>Łączna kwota</p>
       <p>{{ sum }}zł</p>
     </div>
-    <div class="discounts" v-if="usedDiscounts.lenght != 0">
-      <p v-for="code in usedDiscounts" :key="code">
-        - {{ countDiscount(code) }} zł
-      </p>
+    <div class="discounts" v-if="usedDiscounts[0] != undefined">
+      <div v-for="code in usedDiscounts" :key="code" class="discount-row">
+        <p>Kod promocyjny</p>
+        <p>- {{ countDiscount(code) }} zł</p>
+      </div>
     </div>
     <hr />
     <form>
@@ -116,8 +117,8 @@ hr {
 
 .summary {
   .price {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     font-weight: bold;
 
     p {
@@ -128,9 +129,13 @@ hr {
   .discounts {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    padding-right: 3.5em;
     gap: 0.5em;
+    // margin-top: 0.2em;
+
+    .discount-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
 
     p {
       margin: 0;
