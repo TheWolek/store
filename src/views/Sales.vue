@@ -1,57 +1,61 @@
 <template>
   <div>
     <div class="salesSelect">
-      <button
-        class="active"
+      <div
+        class="btn active"
         id="leftBtn"
         @click="
-          () => {
+          (e) => {
+            e.preventDefault();
             changeGender(0);
           }
         "
       >
         <div class="btnBg left"></div>
         <span>dla niej</span>
-      </button>
-      <button
+      </div>
+      <div
+        class="btn"
         id="rightBtn"
         @click="
-          () => {
+          (e) => {
+            e.preventDefault();
             changeGender(1);
           }
         "
       >
         <div class="btnBg right"></div>
         <span>dla niego</span>
-      </button>
+      </div>
     </div>
-    <Sales v-bind:gender="this.selectedGender" />
+    <SalesMain v-bind:gender="this.selectedGender" :key="genderKey" />
   </div>
 </template>
 
 <script>
-import Sales from "../components/productList/sales";
+import SalesMain from "../components/productList/salesMain";
 
 export default {
   name: "sales",
-  components: { Sales },
+  components: { SalesMain },
   data: function () {
     return {
       selectedGender: 0,
+      genderKey: 0,
     };
   },
   methods: {
     changeGender: function (selected) {
+      this.genderKey += 1;
       if (selected == 0) {
-        this.selectedGender = 0;
-        $("#leftBtn").addClass("active");
         $("#rightBtn").removeClass("active");
-        return;
+        $("#leftBtn").addClass("active");
+        this.selectedGender = 0;
+      } else {
+        $("#rightBtn").addClass("active");
+        $("#leftBtn").removeClass("active");
+        this.selectedGender = 1;
       }
-
-      this.selectedGender = 1;
-      $("#leftBtn").removeClass("active");
-      $("#rightBtn").addClass("active");
     },
   },
 };
@@ -64,7 +68,7 @@ export default {
   display: flex;
   justify-content: center;
   gap: 1em;
-  button {
+  .btn {
     border: 0;
     background: none;
     padding: 0.5em;
@@ -108,7 +112,7 @@ export default {
     transform: translateX(0);
   }
 
-  button.active span {
+  .btn.active span {
     font-weight: bold;
   }
 }
