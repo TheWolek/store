@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Basket from '../views/Basket.vue'
+import Sales from '../views/Sales.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/basket',
     name: 'Basket',
     component: Basket
+  },
+  {
+    path: '/sales',
+    name: 'Sales',
+    component: Sales
   }
   // {
   //   path: '/about',

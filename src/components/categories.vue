@@ -1,7 +1,7 @@
 <template>
   <ol class="categories">
     <li>
-      <a id="salesCategory">Sales</a>
+      <router-link to="/sales" id="salesCategory">Sales</router-link>
     </li>
     <li id="womanCategory" class="dropdown">
       <a
