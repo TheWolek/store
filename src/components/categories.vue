@@ -64,7 +64,7 @@
 <script>
 export default {
   name: "categories",
-  data: function() {
+  data: function () {
     return {
       //in future this will be fetched from API...
       womanCategories: {
@@ -168,10 +168,11 @@ ol > li {
 }
 
 .dropdown-menu-item {
+  padding: 0 0.5em;
   ul {
     font-weight: normal;
     text-transform: capitalize;
-    padding-left: 1em;
+    padding-left: 0.5em;
     padding-top: 0.5em;
 
     li + li {
@@ -180,8 +181,12 @@ ol > li {
   }
 }
 
-.category-item:hover {
-  cursor: pointer;
+.category-item {
+  padding: 0.2em;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 #salesCategory {

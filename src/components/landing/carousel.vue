@@ -18,14 +18,14 @@
 <script>
 export default {
   name: "carousel",
-  data: function() {
+  data: function () {
     return {
       activeSlide: 0,
       SliderTimer: 0,
     };
   },
   methods: {
-    selectDot: function(dotId) {
+    selectDot: function (dotId) {
       document.querySelectorAll("#dots div").forEach((item) => {
         item.classList.remove("active");
       });
@@ -33,12 +33,12 @@ export default {
       $("#" + dotId).addClass("active");
     },
 
-    SelectSlide: function(event) {
+    SelectSlide: function (event) {
       let selectedSlide = event.target.id;
       this.changeSlide(parseInt(selectedSlide));
     },
 
-    changeSlide: function(slideId) {
+    changeSlide: function (slideId) {
       this.selectDot(slideId);
       window.clearInterval(this.SliderTimer);
       this.SliderTimer = window.setInterval(this.IntervalSlideChange, 5000);
@@ -58,7 +58,7 @@ export default {
 
       this.activeSlide = slideId;
     },
-    IntervalSlideChange: function() {
+    IntervalSlideChange: function () {
       if (this.activeSlide == 2) {
         this.changeSlide(0);
         return;
@@ -66,12 +66,12 @@ export default {
 
       this.changeSlide(this.activeSlide + 1);
     },
-    startSlider: function() {
+    startSlider: function () {
       this.SliderTimer = window.setInterval(this.IntervalSlideChange, 5000);
     },
   },
-  mounted: function() {
-    this.startSlider();
+  mounted: function () {
+    // this.startSlider();
   },
 };
 </script>
