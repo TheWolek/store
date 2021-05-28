@@ -1,14 +1,14 @@
 <template>
-  <div>{{ id }}</div>
+  <div>{{ item }}</div>
 </template>
 
 <script>
 export default {
   name: "productPage",
-  props: ["id"],
+  props: ["inputItem"],
   data: function () {
     return {
-      item: { id: this.id, name: "test", price: "test" },
+      item: this.inputItem,
     };
   },
 };

@@ -5,7 +5,7 @@
       <router-link
         v-for="item in collection"
         :key="item.id"
-        v-bind:to="'./product/' + item.id"
+        v-bind:to="{ name: 'product', params: { item: item } }"
         class="tile"
       >
         <div class="imgHolder">
