@@ -1,5 +1,5 @@
 <template>
-  <Basket />
+  <Basket v-bind:itemToPush="$route.params.itemToPush" />
 </template>
 
 <script>

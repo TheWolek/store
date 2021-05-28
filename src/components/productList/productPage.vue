@@ -46,7 +46,7 @@ export default {
         return;
       }
       this.err = undefined;
-      this.$router.push("basket");
+      this.$router.push({ name: "Basket", params: { itemToPush: this.item } });
     },
   },
 };

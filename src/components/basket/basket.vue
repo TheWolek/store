@@ -29,6 +29,7 @@ export default {
   components: {
     basketSummary,
   },
+  props: ["itemToPush"],
   methods: {
     sumBasket: function () {
       let total = 0;
@@ -46,17 +47,25 @@ export default {
       console.log(newSum);
       this.BasketSum = newSum;
     },
+
+    addToBasket: function (newItem) {
+      console.log(newItem);
+      newItem.price = newItem.newPrice;
+      this.basket.push(newItem);
+    },
   },
   data: function () {
     return {
-      basket: [
-        { id: 20, name: "buty", price: 49.99 },
-        { id: 10, name: "T-shirt", price: 29.99 },
-      ],
+      // basket: [
+      //   { id: 20, name: "buty", price: 49.99 },
+      //   { id: 10, name: "T-shirt", price: 29.99 },
+      // ],
+      basket: [],
       BasketSum: 0,
     };
   },
   mounted: function () {
+    if (this.itemToPush != undefined) this.addToBasket(this.itemToPush);
     this.sumBasket();
   },
 };
