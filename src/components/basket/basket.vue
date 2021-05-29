@@ -15,7 +15,14 @@
             <div class="item-imgHolder"></div>
             <p class="item-name">{{ item.name }}</p>
             <p class="item-price">{{ item.price + " zł" }}</p>
-            <div class="delete">
+            <div
+              class="delete"
+              v-on:click="
+                () => {
+                  deleteItem(item.id);
+                }
+              "
+            >
               <img class="DeleteBlack" src="../../assets/delete.png" />
               <img class="DeleteRed" src="../../assets/deleteRed.png" />
             </div>
@@ -50,7 +57,6 @@ export default {
     updateBasket: function (e) {
       let newSum = this.BasketSum - this.BasketSum * (e / 100);
       newSum = Math.round(newSum * 100) / 100;
-      console.log(newSum);
       this.BasketSum = newSum;
     },
 
@@ -72,7 +78,10 @@ export default {
     clearBasket: function () {
       this.basket = [];
       this.setCookie("basket", { basket: this.basket });
-      console.log("clear");
+    },
+
+    deleteItem: function (e) {
+      console.log(e);
     },
   },
   data: function () {
