@@ -49,9 +49,14 @@ export default {
     },
 
     addToBasket: function (newItem) {
-      console.log(newItem);
       newItem.price = newItem.newPrice;
       this.basket.push(newItem);
+      this.setCookie("basket", { basket: this.basket });
+    },
+
+    setCookie: function (key, newValue) {
+      this.$cookies.set(key, newValue);
+      console.log("set cookies", this.$cookies.get(key));
     },
   },
   data: function () {
@@ -65,8 +70,16 @@ export default {
     };
   },
   mounted: function () {
-    if (this.itemToPush != undefined) this.addToBasket(this.itemToPush);
-    this.sumBasket();
+    window.setTimeout(() => {
+      if (this.$cookies.get("basket") == null) {
+        this.setCookie("basket", { basket: this.basket });
+      } else {
+        console.log("get cookies", this.$cookies.get("basket"));
+        this.basket = this.$cookies.get("basket").basket;
+      }
+      if (this.itemToPush != undefined) this.addToBasket(this.itemToPush);
+      this.sumBasket();
+    }, 10);
   },
 };
 </script>
