@@ -11,22 +11,12 @@
           <div class="clearBasket" v-on:click="clearBasket">Wyczyść koszyk</div>
         </div>
         <ul>
-          <li v-for="item in this.basket" :key="item.id">
-            <div class="item-imgHolder"></div>
-            <p class="item-name">{{ item.name }}</p>
-            <p class="item-price">{{ item.price + " zł" }}</p>
-            <div
-              class="delete"
-              v-on:click="
-                () => {
-                  deleteItem(item.id);
-                }
-              "
-            >
-              <img class="DeleteBlack" src="../../assets/delete.png" />
-              <img class="DeleteRed" src="../../assets/deleteRed.png" />
-            </div>
-          </li>
+          <basketItem
+            v-for="item in this.basket"
+            :key="item.BasketID"
+            v-bind:inputItem="item"
+            v-on:delete="deleteItem"
+          />
         </ul>
       </div>
       <basketSummary v-bind:sum="BasketSum" @activeCode="updateBasket" />
@@ -36,11 +26,13 @@
 
 <script>
 import basketSummary from "./basketSummary";
+import basketItem from "./basketItem";
 
 export default {
   name: "Basket",
   components: {
     basketSummary,
+    basketItem,
   },
   props: ["itemToPush"],
   methods: {
@@ -62,6 +54,11 @@ export default {
 
     addToBasket: function (newItem) {
       newItem.price = newItem.newPrice;
+      newItem.BasketID = this.countBasket();
+      let test = this.basket.filter((el) => {
+        return el.BasketID == newItem.BasketID;
+      });
+      if (test[0] != undefined) newItem.BasketID += 1;
       this.basket.push(newItem);
       this.setCookie("basket", { basket: this.basket });
     },
@@ -80,8 +77,15 @@ export default {
       this.setCookie("basket", { basket: this.basket });
     },
 
-    deleteItem: function (e) {
-      console.log(e);
+    deleteItem: function (ID) {
+      let newBasket = this.basket.filter((el) => {
+        return el.BasketID != ID;
+      });
+
+      this.basket = newBasket;
+      this.setCookie("basket", { basket: this.basket });
+
+      console.log("delete", this.basket, newBasket, ID);
     },
   },
   data: function () {
