@@ -5,17 +5,23 @@
       <router-link to="/">Powrót na stronę głowną</router-link>
     </div>
     <div class="basket" v-else>
-      <ul>
-        <li v-for="item in this.basket" :key="item.id">
-          <div class="item-imgHolder"></div>
-          <p class="item-name">{{ item.name }}</p>
-          <p class="item-price">{{ item.price + " zł" }}</p>
-          <div class="delete">
-            <img class="DeleteBlack" src="../../assets/delete.png" />
-            <img class="DeleteRed" src="../../assets/deleteRed.png" />
-          </div>
-        </li>
-      </ul>
+      <div>
+        <div class="bar">
+          <h4>Koszyk ({{ countBasket() }})</h4>
+          <div class="clearBasket" v-on:click="clearBasket">Wyczyść koszyk</div>
+        </div>
+        <ul>
+          <li v-for="item in this.basket" :key="item.id">
+            <div class="item-imgHolder"></div>
+            <p class="item-name">{{ item.name }}</p>
+            <p class="item-price">{{ item.price + " zł" }}</p>
+            <div class="delete">
+              <img class="DeleteBlack" src="../../assets/delete.png" />
+              <img class="DeleteRed" src="../../assets/deleteRed.png" />
+            </div>
+          </li>
+        </ul>
+      </div>
       <basketSummary v-bind:sum="BasketSum" @activeCode="updateBasket" />
     </div>
   </div>
@@ -58,6 +64,16 @@ export default {
       this.$cookies.set(key, newValue);
       console.log("set cookies", this.$cookies.get(key));
     },
+
+    countBasket: function () {
+      return this.basket.length;
+    },
+
+    clearBasket: function () {
+      this.basket = [];
+      this.setCookie("basket", { basket: this.basket });
+      console.log("clear");
+    },
   },
   data: function () {
     return {
@@ -94,6 +110,22 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 2em;
+
+    .bar {
+      display: flex;
+      padding: 0.5em 1em;
+
+      h4 {
+        text-align: left;
+        width: 70%;
+      }
+
+      div {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
 
     ul {
       list-style: none;
