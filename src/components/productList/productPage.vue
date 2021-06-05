@@ -1,28 +1,32 @@
 <template>
-  <div class="productPage">
-    <div class="productImgHolder">
-      <div id="productImgPrev"></div>
-      <img src="https://via.placeholder.com/400x600" />
-      <div id="productImgNext"></div>
-    </div>
-    <div class="productDetails">
-      <h3>{{ item.name }}</h3>
-      <p class="newPrice">{{ item.newPrice }} zł</p>
-      <p class="regPrice">{{ item.regularPrice }} zł</p>
-      <form v-on:submit="this.formValidation">
-        <div class="form-group">
-          <select name="size" id="size" v-model="selectedSize">
-            <option selected hidden>Wybierz rozmiar</option>
-            <option value="xs">XS</option>
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
-            <option value="xl">XL</option>
-          </select>
-          <div v-if="err != undefined" id="err">{{ err }}</div>
-          <input type="submit" value="Dodaj do koszyka" />
-        </div>
-      </form>
+  <div>
+    <div v-if="loading">LOADING...</div>
+    <div v-if="err != undefined">{{ err.msg }}</div>
+    <div class="productPage" v-if="!loading && err == undefined">
+      <div class="productImgHolder">
+        <div id="productImgPrev"></div>
+        <img src="https://via.placeholder.com/400x600" />
+        <div id="productImgNext"></div>
+      </div>
+      <div class="productDetails">
+        <h3>{{ item.name }}</h3>
+        <p class="newPrice">{{ item.newPrice }} zł</p>
+        <p class="regPrice">{{ item.regularPrice }} zł</p>
+        <form v-on:submit="this.formValidation">
+          <div class="form-group">
+            <select name="size" id="size" v-model="selectedSize">
+              <option selected hidden>Wybierz rozmiar</option>
+              <option value="xs">XS</option>
+              <option value="s">S</option>
+              <option value="m">M</option>
+              <option value="l">L</option>
+              <option value="xl">XL</option>
+            </select>
+            <div v-if="err != undefined" id="err">{{ err }}</div>
+            <input type="submit" value="Dodaj do koszyka" />
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -30,12 +34,13 @@
 <script>
 export default {
   name: "productPage",
-  props: ["inputItem"],
+  props: ["inputItemId"],
   data: function () {
     return {
-      item: this.inputItem,
+      item: {},
       selectedSize: undefined,
       err: undefined,
+      loading: true,
     };
   },
   methods: {
@@ -48,6 +53,20 @@ export default {
       this.err = undefined;
       this.$router.push({ name: "Basket", params: { itemToPush: this.item } });
     },
+  },
+  mounted: function () {
+    const item = fetch("http://localhost:5000/collection/" + this.inputItemId)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status == 404) {
+          this.loading = false;
+          this.err = { status: data.status, msg: data.err };
+          return;
+        }
+        this.loading = false;
+        this.err = undefined;
+        this.item = data[0];
+      });
   },
 };
 </script>

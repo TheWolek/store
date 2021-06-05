@@ -1,5 +1,5 @@
 <template>
-  <productPage v-bind:inputItem="$route.params.item" />
+  <productPage v-bind:inputItemId="$route.params.id" />
 </template>
 
 <script>
